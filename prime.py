@@ -136,7 +136,7 @@ penguins_results = {} # Słownik do agregacji wyników metryki F1 dla poszczegó
 
 # 4a. Regresja Logistyczna (model parametryczny, wymaga standaryzacji cech)
 print("\nTrenowanie Logistic Regression...")
-lr_peng = LogisticRegression(max_iter=1000, random_state=42) # Zwiększony limit iteracji gwarantuje zbieżność algorytmu optymalizacyjnego
+lr_peng = LogisticRegression(max_iter=1000, random_state=42, solver='saga', penalty='elasticnet', l1_ratio=0.5) # Zwiększony limit iteracji gwarantuje zbieżność algorytmu optymalizacyjnego; l1_ratio=0.5 reprezentuje pośrednią regularyzację między L1 i L2
 lr_peng.fit(X_train_peng_scaled, y_train_peng)
 y_pred_lr_peng = lr_peng.predict(X_test_peng_scaled)
 # Obliczenie F1-score w wariancie 'macro' (średnia arytmetyczna F1-score dla każdej klasy traktowanej równorzędnie)
@@ -263,3 +263,4 @@ plt.close()
 print("\n" + "="*80)
 print("ANALIZA ZBORU PINGWINÓW ZAKOŃCZONA")
 print("="*80)
+
